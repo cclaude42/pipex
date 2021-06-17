@@ -6,13 +6,13 @@
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 22:08:23 by cclaude           #+#    #+#             */
-/*   Updated: 2021/06/15 23:22:04 by cclaude          ###   ########.fr       */
+/*   Updated: 2021/06/17 13:48:25 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int openfile (char *filename)
+int	openfile (char *filename)
 {
 	if (access(filename, F_OK))
 	{
@@ -24,13 +24,33 @@ int openfile (char *filename)
 	return (open(filename, O_CREAT | O_WRONLY | O_TRUNC, S_IRWXU));
 }
 
-void exec (char *cmd)
+char	**getArgs (char *cmd)
 {
-	
-	execve(cmd, NULL, NULL);
+
 }
 
-void redir (char *cmd, int fdin, int fdout)
+char	*getPath (char *cmd, char **env)
+{
+	int	i;
+
+	i = 0;
+
+}
+
+void	exec (char *cmd, char **env)
+{
+	char	**args;
+	char	*path;
+
+	args = getArgs(cmd);
+	if (strchr(args[0], '/'))
+		path = args[0];
+	else
+		path = getPath(args[0], env);
+	execve(path, args, env);
+}
+
+void	redir (char *cmd, char **env, int fdin, int fdout)
 {
 	pid_t	pid;
 	int		pipefd[2];
@@ -58,8 +78,7 @@ void redir (char *cmd, int fdin, int fdout)
 	exec(cmd);
 }
 
-
-int main (int ac, char **av)
+int	main (int ac, char **av, char **env)
 {
 	int	fdin;
 	int	fdout;
@@ -68,8 +87,8 @@ int main (int ac, char **av)
 	{
 		fdin = openfile(av[1]);
 		fdout = openfile(av[4]);
-		redir(av[2], fdin, 0);
-		redir(av[3], 0, fdout);
+		redir(av[2], env, fdin, 0);
+		redir(av[3], env, 0, fdout);
 	}
 	else
 		return (1);
