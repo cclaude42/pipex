@@ -17,12 +17,12 @@ OBJB = $(SRCB:c=o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@echo "\033[0;32mCompiling pipex..."
+	@echo "\033[0;32m\n\nCompiling pipex..."
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 	@echo "\n\033[0mDone !"
 
 %.o: %.c
-	@printf "\033[0;33mGenerating minishell objects... %-33.33s\r" $@
+	@printf "\033[0;33mGenerating pipex objects... %-20.20s\r" $@
 	@${CC} ${CFLAGS} -c $< -o $@
 
 clean:
