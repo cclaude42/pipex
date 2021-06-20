@@ -10,7 +10,7 @@ SRC = pipex.c utils.c
 
 OBJ = $(SRC:c=o)
 
-SRCB = pipex_bonus.c utils.c
+SRCB = bonus.c utils.c
 
 OBJB = $(SRCB:c=o)
 
@@ -18,11 +18,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "\033[0;32m\n\nCompiling pipex..."
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 	@echo "\n\033[0mDone !"
 
 %.o: %.c
-	@printf "\033[0;33mGenerating pipex objects... %-20.20s\r" $@
+	@printf "\033[0;33mGenerating pipex objects... %-10.10s\r" $@
 	@${CC} ${CFLAGS} -c $< -o $@
 
 clean:
@@ -39,9 +39,9 @@ fclean:
 
 re: fclean all
 
-bonus: $(OBJB)
-	@echo "\033[0;32mCompiling pipex (with bonuses)..."
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJB) $(LIBFT)
+$(NAME): $(OBJB)
+	@echo "\033[0;32m\n\nCompiling pipex (with bonuses)..."
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJB)
 	@echo "\n\033[0mDone !"
 
-.PHONY: clean fclean re
+.PHONY: clean fclean re bonus

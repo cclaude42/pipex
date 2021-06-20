@@ -6,7 +6,7 @@
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 23:09:20 by cclaude           #+#    #+#             */
-/*   Updated: 2021/06/17 18:13:24 by cclaude          ###   ########.fr       */
+/*   Updated: 2021/06/20 12:52:21 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ char	*path_join (char *path, char *bin)
 	return (joined);
 }
 
-int	str_ncmp (char *str1, char *str2, unsigned int n)
+int	str_ncmp (char *str1, char *str2, int n)
 {
-	while (n-- && *str1 && *str2 && *str1 == *str2)
+	while (--n > 0 && *str1 && *str2 && *str1 == *str2)
 	{
 		str1++;
 		str2++;
