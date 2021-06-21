@@ -6,7 +6,7 @@
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 23:09:20 by cclaude           #+#    #+#             */
-/*   Updated: 2021/06/20 12:52:21 by cclaude          ###   ########.fr       */
+/*   Updated: 2021/06/21 17:14:27 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	**str_split (char *str, char sep)
 			count++;
 	}
 	tab = malloc(sizeof(char *) * (count + 2));
-	tab[count - 1] = NULL;
+	tab[count + 1] = NULL;
 	i = 0;
 	while (i < count + 1)
 	{

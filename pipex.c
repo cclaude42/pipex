@@ -6,7 +6,7 @@
 /*   By: cclaude <cclaude@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/15 22:08:23 by cclaude           #+#    #+#             */
-/*   Updated: 2021/06/20 20:48:42 by cclaude          ###   ########.fr       */
+/*   Updated: 2021/06/21 17:15:18 by cclaude          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	openfile (char *filename, int mode)
 		return (open(filename, O_RDONLY));
 	}
 	else
-		return (open(filename, CREATE_TRUNC, DEFAULT_MODE));
+		return (open(filename, O_CREAT | O_WRONLY | O_TRUNC,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH));
 }
 
 char	*getPath (char *cmd, char **env)
@@ -72,7 +73,7 @@ void	exec (char *cmd, char **env)
 	exit(127);
 }
 
-void	redir (char *cmd, char **env, int error)
+void	redir (char *cmd, char **env, int fdin)
 {
 	pid_t	pid;
 	int		pipefd[2];
@@ -89,7 +90,7 @@ void	redir (char *cmd, char **env, int error)
 	{
 		close(pipefd[0]);
 		dup2(pipefd[1], STDOUT);
-		if (error)
+		if (fdin == STDIN)
 			exit(1);
 		else
 			exec(cmd, env);

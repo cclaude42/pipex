@@ -27,19 +27,19 @@ $(NAME): $(OBJ)
 
 clean:
 	@echo "\033[0;31m\nDeleting objects..."
-	@rm -f $(OBJ)
+	@rm -f $(OBJ) $(OBJB)
 	@echo "\033[0m"
 
 fclean:
 	@echo "\033[0;31m\nDeleting objects..."
-	@rm -f $(OBJ)
+	@rm -f $(OBJ) $(OBJB)
 	@echo "\nDeleting executable..."
 	@rm -f $(NAME)
 	@echo "\033[0m"
 
 re: fclean all
 
-$(NAME): $(OBJB)
+bonus: $(OBJB)
 	@echo "\033[0;32m\n\nCompiling pipex (with bonuses)..."
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJB)
 	@echo "\n\033[0mDone !"
